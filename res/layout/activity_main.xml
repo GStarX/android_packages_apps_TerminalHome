@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  主界面（HOME）：只用 TextView / Button / ScrollView / LinearLayout，
+  不依赖 Material / AppCompat。
+  标题 tv_title 需要接收点击事件（连续 7 次打开维护入口）。
+-->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/terminal_background"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:fontFamily="monospace"
+            android:text="@string/app_name"
+            android:textColor="@color/terminal_accent"
+            android:textSize="26sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_subtitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="monospace"
+            android:text="@string/main_subtitle"
+            android:textColor="@color/terminal_text_muted"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/tv_status_terminal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:fontFamily="monospace"
+            android:text="@string/status_terminal_missing"
+            android:textColor="@color/terminal_text"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tv_status_lock"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="monospace"
+            android:text="@string/status_lock_not_device_owner"
+            android:textColor="@color/terminal_text"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tv_status_pin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="monospace"
+            android:text="@string/status_pin_not_set"
+            android:textColor="@color/terminal_text"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tv_status_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="monospace"
+            android:textColor="@color/terminal_text_muted"
+            android:textSize="13sp" />
+
+        <Button
+            android:id="@+id/btn_open_maintenance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/action_open_maintenance"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tv_entry_hint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:fontFamily="monospace"
+            android:text="@string/hint_entry"
+            android:textColor="@color/terminal_text_muted"
+            android:textSize="12sp" />
+    </LinearLayout>
+</ScrollView>

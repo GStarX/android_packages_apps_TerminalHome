@@ -1,0 +1,24 @@
+# Android / Soong / IDE 忽略项（TerminalHome 是 ROM 内置应用，不是 Gradle 工程）
+*.iml
+.gradle/
+/local.properties
+/.idea/
+.DS_Store
+
+# 构建输出
+/build/
+/out/
+/bin/
+/gen/
+/captures/
+.externalNativeBuild/
+.cxx/
+
+# 产物
+*.apk
+*.ap_
+*.aab
+*.dex
+*.class
+*.jar
+*.log

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  终端风格应用图标（简单矢量：深色终端窗口 + 绿色提示符）。
+  仅作为 android:icon 引用，不参与运行时绘制逻辑。
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- 终端窗口 -->
+    <path
+        android:fillColor="#FF14201A"
+        android:pathData="M20,18 h68 a10,10 0 0 1 10,10 v52 a10,10 0 0 1 -10,10 h-68 a10,10 0 0 1 -10,-10 v-52 a10,10 0 0 1 10,-10 z" />
+
+    <!-- 顶部标题栏 -->
+    <path
+        android:fillColor="#FF1F3329"
+        android:pathData="M10,28 h88 v10 h-88 z" />
+
+    <!-- 提示符 ">" -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#FF3DDC84"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:strokeWidth="5"
+        android:pathData="M30,52 l12,12 -12,12" />
+
+    <!-- 光标 "_" -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#FF3DDC84"
+        android:strokeLineCap="round"
+        android:strokeWidth="5"
+        android:pathData="M54,76 h24" />
+</vector>

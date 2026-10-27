@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  TerminalHome 文案（中文，暂不做多语言）。
+  注意：含多个占位符的字符串使用位置参数（%1$s / %1$d），便于代码 String.format 使用。
+-->
+<resources>
+    <string name="app_name">TerminalHome</string>
+    <string name="main_subtitle">Polaris TerminalOS · 终端主屏</string>
+
+    <!-- 主界面状态行 -->
+    <string name="status_terminal_installed">Termux：已安装，启动入口可用</string>
+    <string name="status_terminal_installed_no_activity">Termux：已安装，但主 Activity 不可解析</string>
+    <string name="status_terminal_missing">Termux：未安装（com.termux）</string>
+    <string name="status_lock_not_device_owner">锁定：未启用（非 Device Owner，已降级为不锁定）</string>
+    <string name="status_lock_ready">锁定：Device Owner 已就绪，锁任务未激活</string>
+    <string name="status_lock_active">锁定：锁任务模式已激活</string>
+    <string name="status_pin_set">维护 PIN：已设置</string>
+    <string name="status_pin_not_set">维护 PIN：未设置（建议立即在维护界面设置）</string>
+    <string name="status_attempts_format">最近 10 分钟失败重启：%1$d / %2$d 次</string>
+    <string name="status_last_failure_format">最近失败：%1$s · %2$s</string>
+    <string name="status_home_takeover_format">默认 HOME 接管：%1$s</string>
+    <string name="status_quick_settings_format">锁任务快捷设置特性：%1$s</string>
+    <string name="hint_entry">维护入口：连续快速点击标题 7 次（需要维护 PIN）</string>
+    <string name="action_open_maintenance">进入维护界面</string>
+
+    <!-- 主界面提示 -->
+    <string name="notice_maintenance_mode">维护模式已开启：不会自动打开终端。可进入维护界面恢复。</string>
+    <string name="notice_termux_not_installed">未检测到 Termux（com.termux）。请安装或预置 Termux 后，从维护界面重新打开终端。</string>
+    <string name="notice_termux_activity_unavailable">检测到 Termux，但主 Activity（com.termux.app.TermuxActivity）不可用，无法自动启动。</string>
+    <string name="notice_limiter_exhausted">自动重启已触发限流：10 分钟内失败重启达到 5 次上限，自动启动已暂停（约 %1$d 秒后窗口释放）。请进入维护界面处理。</string>
+    <string name="notice_retry_cooldown">重启冷静期中，约 %1$d 秒后自动重试…</string>
+    <string name="notice_launch_failed">自动打开 Termux 失败：%1$s</string>
+
+    <string name="toast_title_taps_remaining">再连续点击标题 %1$d 次进入维护入口</string>
+    <string name="toast_maintenance_open_failed">无法打开维护界面（详见 logcat）</string>
+    <string name="toast_back_in_maintenance">维护模式中：请从维护界面操作</string>
+
+    <!-- 维护界面 -->
+    <string name="maintenance_title">TerminalHome 维护界面</string>
+    <string name="maintenance_diagnostics_title">诊断信息</string>
+    <string name="action_retry_termux">重新打开 Termux（恢复终端模式）</string>
+    <string name="action_exit_lock">进入维护模式（退出锁定）</string>
+    <string name="action_set_pin">设置 / 修改维护 PIN</string>
+    <string name="action_request_supervision_role">申请监督角色（SYSTEM_SUPERVISION，Android 16）</string>
+    <string name="action_open_settings">打开系统设置</string>
+    <string name="maintenance_exit_note">说明：退出锁定后本应用进入维护模式，不再自动打开终端；重启设备会清除维护模式并恢复终端模式（BOOT_COMPLETED 时重置）。「重新打开 Termux」也会清除维护模式并返回终端流程。退出锁定不会取消 Device Owner，也不会卸载应用。危险操作（退出锁定）必须验证维护 PIN。若设备仍处于锁任务模式，系统可能阻止打开系统设置，请先退出锁定。</string>
+    <string name="maintenance_pin_note">安全提示：PIN 只保存 PBKDF2 派生值（随机 salt + 迭代次数），不保存明文。PIN 遗忘后无法通过界面找回，只能清除应用数据或重新部署（见 README）。若尚未设置 PIN，任何能操作设备的人都可以先设置 PIN，请在首次部署后立即设置。</string>
+
+    <!-- 诊断信息（格式参数顺序见 MaintenanceActivity.refreshDiagnostics） -->
+    <string name="diagnostics_format">Termux：%1$s\nDevice Owner：%2$s\n设备管理员已激活：%3$s\n锁任务模式：%4$s\n默认 HOME 接管：%5$s\n锁任务快捷设置特性：%6$s\n维护模式：%7$s\n维护 PIN：%8$s\n最近 10 分钟失败重启：%9$d / %10$d\n最近失败原因：%11$s\n最近失败时间：%12$s\n最近成功启动：%13$s\nSYSTEM_SUPERVISION 角色：%14$s</string>
+
+    <!-- PIN 对话框 -->
+    <string name="dialog_verify_pin_title">输入维护 PIN</string>
+    <string name="dialog_set_pin_title">设置维护 PIN</string>
+    <string name="dialog_pin_hint">4-12 位数字 PIN</string>
+    <string name="dialog_pin_confirm_hint">再次输入 PIN</string>
+    <string name="error_pin_wrong">PIN 错误</string>
+    <string name="error_pin_corrupted">PIN 存储数据损坏，无法校验（详见 logcat）</string>
+    <string name="error_pin_format">PIN 必须为 4-12 位纯数字</string>
+    <string name="error_pin_mismatch">两次输入的 PIN 不一致</string>
+    <string name="toast_pin_set_ok">维护 PIN 已保存</string>
+    <string name="toast_pin_set_failed">维护 PIN 保存失败（详见 logcat）</string>
+    <string name="toast_pin_required_for_exit">请先设置维护 PIN，再退出锁定</string>
+    <string name="toast_pin_not_set_gate">尚未设置维护 PIN：已直接进入维护界面，请先设置 PIN</string>
+    <string name="toast_exit_lock_done">已退出锁定并进入维护模式；重启设备将回到终端模式</string>
+    <string name="toast_exit_lock_partial">已进入维护模式，但退出锁定未确认成功（详见 logcat）</string>
+    <string name="toast_manual_retry">已重置失败重启限流并清除维护模式，正在返回终端流程…</string>
+    <string name="toast_termux_not_installed">未检测到 Termux，无法重新打开</string>
+    <string name="toast_settings_unavailable">无法打开系统设置（可能被锁任务模式阻止）</string>
+
+    <!-- 监督角色（SYSTEM_SUPERVISION，Android 16） -->
+    <string name="toast_role_requires_android16">当前系统低于 Android 16（API 36），不存在 SYSTEM_SUPERVISION 角色</string>
+    <string name="toast_role_requires_device_owner">仅 Device Owner 可申请 SYSTEM_SUPERVISION 角色</string>
+    <string name="toast_role_unavailable">系统 RoleManager 不可用，无法申请监督角色</string>
+    <string name="toast_role_request_failed">无法打开监督角色申请界面（详见 logcat）</string>
+    <string name="toast_role_granted">已持有监督角色；请重启设备或重新进入终端流程，使锁任务快捷设置特性重新下发</string>
+    <string name="toast_role_not_granted">未获得监督角色（用户取消、系统拒绝或角色不可用）</string>
+
+    <!-- 设备管理员 -->
+    <string name="device_admin_label">TerminalHome 设备管理员</string>
+    <string name="device_admin_description">用于把本机设置为 Device Owner，以配置锁任务（kiosk）模式与默认 HOME。</string>
+    <string name="admin_disable_warning">停用 TerminalHome 设备管理员会关闭锁定能力，终端将降级为不锁定。确定继续？</string>
+
+    <!-- 通用取值 -->
+    <string name="value_yes">是</string>
+    <string name="value_no">否</string>
+    <string name="value_none">无</string>
+    <string name="value_not_supported">不支持（当前系统无该特性）</string>
+    <string name="value_installed">已安装</string>
+    <string name="value_installed_no_entry">已安装，但主 Activity 不可用</string>
+    <string name="value_not_installed">未安装</string>
+    <string name="value_locked">已激活</string>
+    <string name="value_not_locked">未激活</string>
+    <string name="value_enabled">已启用</string>
+    <string name="value_rejected">被系统拒绝（需要 SYSTEM_SUPERVISION 角色）</string>
+    <string name="value_pending">已请求启用，等待系统确认</string>
+    <string name="value_home_takeover_applied">已接管（addPersistentPreferredActivity）</string>
+    <string name="value_home_takeover_not_owner">未接管（非 Device Owner）</string>
+    <string name="value_home_takeover_failed">接管失败（检查 Device Owner 状态与 logcat）</string>
+    <string name="value_home_takeover_unknown">未尝试</string>
+    <string name="value_pin_set">已设置</string>
+    <string name="value_pin_not_set">未设置</string>
+    <string name="value_maintenance_on">已开启</string>
+    <string name="value_maintenance_off">未开启</string>
+    <string name="value_failure_reason_none">无</string>
+    <string name="value_role_not_applicable">不适用（系统低于 Android 16）</string>
+    <string name="value_role_held">已持有</string>
+    <string name="value_role_not_held">未持有</string>
+    <string name="value_role_unknown">未知（RoleManager 不可用或查询异常）</string>
+</resources>

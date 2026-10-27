@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- TerminalHome 终端风格配色（纯色，不依赖 Material 主题）。 -->
+<resources>
+    <!-- 主背景：接近终端黑 -->
+    <color name="terminal_background">#FF0B0F0D</color>
+    <!-- 次级表面色（预留） -->
+    <color name="terminal_surface">#FF14201A</color>
+    <!-- 主文本 -->
+    <color name="terminal_text">#FFE6F2EA</color>
+    <!-- 弱化文本 -->
+    <color name="terminal_text_muted">#FF8FA99A</color>
+    <!-- 终端绿强调色 -->
+    <color name="terminal_accent">#FF3DDC84</color>
+    <!-- 警告色（PIN 安全提示等） -->
+    <color name="terminal_warning">#FFFFB74D</color>
+    <!-- 错误色（预留） -->
+    <color name="terminal_error">#FFFF6E6E</color>
+</resources>

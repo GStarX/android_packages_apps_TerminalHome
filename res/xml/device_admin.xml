@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  设备管理员策略：只声明最小集合。
+  force-lock 仅用于证明该组件是合法的 DeviceAdminReceiver；
+  本应用真正使用的是 Device Owner 能力（锁任务白名单、锁任务特性、默认 HOME），
+  不申请 wipe-data / reset-password 等破坏性策略。
+-->
+<device-admin xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-policies>
+        <force-lock />
+    </uses-policies>
+</device-admin>

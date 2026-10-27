@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  TerminalHome：Polaris (Xiaomi MIX 2S) / LineageOS 23.2 的终端 kiosk HOME 应用。
+  作为 ROM 内置应用由 Soong 构建（PRODUCT_PACKAGES += TerminalHome），不是 Gradle 工程。
+
+  设计约束：
+  - 不申请任何网络权限，不集成 analytics / 崩溃上报；
+  - 只申请 RECEIVE_BOOT_COMPLETED（normal 权限，无需 privapp 白名单）；
+  - MainActivity 是 HOME 候选；MaintenanceActivity 仅应用内跳转（exported=false）；
+  - BootReceiver 不 directBootAware，避免加密解锁前访问用户数据。
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="org.terminalos.terminalhome">
+
+    <!-- 只用于接收 BOOT_COMPLETED（重置限流/维护模式）。normal 权限，安装即授予。 -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <!-- Android 11+ 包可见性：检测/启动 Termux 需要显式声明 com.termux。 -->
+    <queries>
+        <package android:name="com.termux" />
+    </queries>
+
+    <uses-sdk
+        android:minSdkVersion="28"
+        android:targetSdkVersion="35" />
+
+    <application
+        android:allowBackup="false"
+        android:icon="@drawable/ic_terminal"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.TerminalHome">
+
+        <!--
+          HOME Activity：系统主屏候选。
+          - category HOME + DEFAULT，priority 1；
+          - singleTask 避免重复实例；excludeFromRecents 不进入最近任务；
+          - exported=true 是 HOME 被系统拉起的前提。
+        -->
+        <activity
+            android:name=".MainActivity"
+            android:excludeFromRecents="true"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:launchMode="singleTask"
+            android:theme="@style/Theme.TerminalHome">
+            <intent-filter android:priority="1">
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.HOME" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <!-- 维护界面：只允许应用内部 startActivity，外部无法直接拉起。 -->
+        <activity
+            android:name=".MaintenanceActivity"
+            android:excludeFromRecents="true"
+            android:exported="false"
+            android:label="@string/maintenance_title"
+            android:theme="@style/Theme.TerminalHome" />
+
+        <!--
+          设备管理员组件（Device Owner 的 admin 组件）。
+          permission=BIND_DEVICE_ADMIN 由系统持有，应用不需要（也不应该）在
+          uses-permission 里声明它。
+        -->
+        <receiver
+            android:name=".AdminReceiver"
+            android:description="@string/device_admin_description"
+            android:exported="true"
+            android:label="@string/device_admin_label"
+            android:permission="android.permission.BIND_DEVICE_ADMIN">
+            <meta-data
+                android:name="android.app.device_admin"
+                android:resource="@xml/device_admin" />
+            <intent-filter>
+                <action android:name="android.app.action.DEVICE_ADMIN_ENABLED" />
+            </intent-filter>
+        </receiver>
+
+        <!--
+          开机广播：只写 SharedPreferences（重置限流/维护模式、记录启动时间），
+          不启动 Activity、不做耗时操作（理由见 BootReceiver 类注释）。
+          directBootAware=false：只在用户解锁后的 BOOT_COMPLETED 生效。
+        -->
+        <receiver
+            android:name=".BootReceiver"
+            android:directBootAware="false"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+    </application>
+</manifest>

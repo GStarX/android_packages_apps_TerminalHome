@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  TerminalHome 主题：使用系统内置 Theme.Material.NoActionBar（深色），
+  不引入 Material Components / AppCompat 依赖。
+-->
+<resources>
+    <style name="Theme.TerminalHome" parent="@android:style/Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@color/terminal_background</item>
+        <item name="android:colorAccent">@color/terminal_accent</item>
+        <item name="android:statusBarColor">@color/terminal_background</item>
+        <item name="android:navigationBarColor">@color/terminal_background</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar">false</item>
+    </style>
+</resources>

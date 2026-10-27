@@ -1,0 +1,4 @@
+# 统一换行：Android 源码/资源以 LF 存储，避免 Windows 编辑后出现 CRLF。
+* text=auto eol=lf
+
+*.apk binary

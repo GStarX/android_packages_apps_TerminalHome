@@ -1,0 +1,40 @@
+// TerminalHome：Polaris (Xiaomi MIX 2S) / LineageOS 23.2 的终端 kiosk HOME 应用。
+//
+// 这是 ROM 内置应用，使用 Soong 构建，不是 Gradle 工程。
+// 典型集成方式（未验证，见 README）：
+//   1) 把本目录放到 AOSP/LineageOS 源码树的 packages/apps/TerminalHome；
+//   2) 在设备产品 makefile 中加入 PRODUCT_PACKAGES += TerminalHome；
+//   3) m TerminalHome（或整包构建）。
+android_app {
+    name: "TerminalHome",
+
+    srcs: ["src/**/*.java"],
+    resource_dirs: ["res"],
+    manifest: "AndroidManifest.xml",
+
+    // 以平台证书签名：作为系统预置应用 + 将来可能需要平台级信任。
+    certificate: "platform",
+
+    // 不安装到 priv-app：本应用不申请任何 privileged/signature 权限，
+    // 因此不需要 privapp-permissions-allowlist（详见 README 的权限说明）。
+    privileged: false,
+
+    // 该模块位于平台源码树内，以平台 API 面编译（不设置 sdk_version）。
+    // 当前 Java 代码只使用公开 API；选择 platform_apis 是为了：
+    //   - 不依赖 SDK stub 构建产物，ROM/设备构建更稳；
+    //   - 为将来可能的系统级行为保留空间。
+    // 注意：KioskController 对 Android 16 隐藏常量采用反射探测，不编译依赖 @hide API。
+    platform_apis: true,
+
+    // 与 AndroidManifest.xml 的 targetSdkVersion 保持一致（Android 15 / API 35）。
+    target_sdk_version: "35",
+
+    // 与 AndroidManifest.xml 的 minSdkVersion 保持一致（Android 9 / API 28）。
+    // 显式声明，避免平台构建默认值覆盖 Manifest 中的 minSdkVersion。
+    min_sdk_version: "28",
+
+    // 预置系统应用不做 R8/资源压缩，保证行为可审查、便于实机调试。
+    optimize: {
+        enabled: false,
+    },
+}
